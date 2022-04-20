@@ -12,3 +12,16 @@
 		font-size: 2.5rem;
 	}
 }
+
+@media screen and (max-width: 670px) {
+	.header {
+		flex-direction: column;
+
+		&--title {
+			font-size: 3.2rem;
+		}
+		&--credits {
+			font-size: 2rem;
+		}
+	}
+}

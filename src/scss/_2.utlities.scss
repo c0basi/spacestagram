@@ -1,5 +1,6 @@
 :root {
 	font-size: 62.5%;
+	height: 100%;
 }
 
 body {
@@ -25,9 +26,3 @@ li {
 // 	color: white;
 // 	letter-spacing: 0.2rem;
 // }
-
-#root {
-	display: flex;
-	min-height: 100vh;
-	flex-direction: column;
-}
