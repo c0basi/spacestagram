@@ -4,10 +4,14 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import Badge from '@mui/material/Badge';
 import DateRangePicker from '@wojtekmaj/react-daterange-picker';
 import './UtilityBar.scss';
+import { setDefaultDate } from '../../utils/dateFunctions';
 
 const UtilityBar = () => {
-	const [value, onChange] = useState([new Date(), new Date()]);
-	console.log(value);
+	const [date, setDate] = React.useState<any>(setDefaultDate(false));
+
+	const handleSelectedDate = (date: Date[]) => {
+		setDate(date);
+	};
 
 	return (
 		<div className="utility">
@@ -19,7 +23,11 @@ const UtilityBar = () => {
 					</Badge>
 				</IconButton>
 			</div>
-			<DateRangePicker value={value} />
+			<DateRangePicker
+				value={date}
+				onChange={setDate}
+				minDate={new Date(1995, 5, 16)}
+			/>
 		</div>
 	);
 };
