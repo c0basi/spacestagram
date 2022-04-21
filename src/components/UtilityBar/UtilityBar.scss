@@ -38,3 +38,13 @@
 DateRangePicker {
 	transform: scale(1.4);
 }
+
+@media screen and (max-width: 640px) {
+	.utility {
+		flex-direction: column;
+		width: 85%;
+		&__actions {
+			margin-bottom: 1rem;
+		}
+	}
+}
