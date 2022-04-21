@@ -4,6 +4,8 @@ import Animation from './backgroundAnimation/Animation';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import DataSection from './components/DataSection/DataSection';
+import UtilityBar from './components/UtilityBar/UtilityBar';
+
 function App() {
 	return (
 		<div className="App">
@@ -11,6 +13,7 @@ function App() {
 			<div className="twinkling"></div> */}
 			<Animation />
 			<Header />
+			<UtilityBar />
 			<div>Make some food</div>
 			<DataSection />
 			<Footer />
