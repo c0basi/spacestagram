@@ -11,12 +11,12 @@ interface UtilityBarProps {
 }
 
 const UtilityBar = ({ onDateChange }: UtilityBarProps) => {
-	const [date, setDate] = React.useState<any>(setDefaultDate(false));
+	const [date, setDate] = React.useState<any[]>(setDefaultDate(false));
 
-	const handleSelectedDate = (date: string | Date) => {
+	const handleSelectedDate = (date: Date[]) => {
+		onDateChange([date[0].toISOString(), date[1].toISOString()]);
 		setDate(date);
 	};
-	console.log(date);
 
 	return (
 		<div className="utility">
@@ -30,7 +30,7 @@ const UtilityBar = ({ onDateChange }: UtilityBarProps) => {
 			</div>
 			<DateRangePicker
 				value={date}
-				onChange={handleSelectedDate}
+				onChange={(value) => handleSelectedDate(value as unknown as Date[])}
 				minDate={new Date(1995, 5, 16)}
 			/>
 		</div>
