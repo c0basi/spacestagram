@@ -5,6 +5,7 @@ import { convertDateRange, setDefaultDate } from '../../utils/dateFunctions';
 import UtilityBar from '../UtilityBar/UtilityBar';
 import { getNasaData } from '../../utils/dateFunctions';
 import ImageCard from '../UI/ImageCard/ImageCard';
+import { Apod } from '../../types/Types';
 const api_Key = 'EgxctQoITsGFJtjVAXfeldq6xEKnW6y9j4Wwm0IG';
 
 const DataSection = () => {
@@ -12,6 +13,7 @@ const DataSection = () => {
 	const [hasError, setHasError] = useState(false);
 	const [errorMessage, setErrorMessage] = useState<null | string>(null);
 	const [dateRange, setDateRange] = useState<any[]>(setDefaultDate(true));
+	const [nasaPosts, setNasaPosts] = useState<Apod[]>([]);
 
 	console.log('date range for data section', dateRange);
 
@@ -29,8 +31,11 @@ const DataSection = () => {
 			setIsLoading(true);
 			const res = await getNasaData(earthDates);
 			const data = await res.data;
+			console.log('waiting for data');
+
 			console.log(data);
 			setIsLoading(false);
+			setNasaPosts(data);
 		} catch (err) {
 			setIsLoading(false);
 			setHasError(true);
@@ -46,6 +51,11 @@ const DataSection = () => {
 	const clickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
 		fetchData();
 	};
+
+	// console.log('url is ', nasaPosts[0].title);
+
+	// console.log(`gotenthe posts`, nasaPosts[0]);
+
 	return (
 		<section className="container">
 			<>
@@ -53,12 +63,21 @@ const DataSection = () => {
 				<button onClick={clickHandler}>Click</button>
 				{isLoading && <p>Loading...</p>}
 				{hasError && <p>error...</p>}
+				{nasaPosts.length}
 				<div className="container--images">
+					{!isLoading &&
+						nasaPosts.map((item, index) => (
+							<ImageCard
+								key={index}
+								image={item.hdUrl ? item.hdUrl : item.url}
+								alt={item.title}
+							/>
+						))}
+					{/* <ImageCard />
 					<ImageCard />
 					<ImageCard />
 					<ImageCard />
-					<ImageCard />
-					<ImageCard />
+					<ImageCard /> */}
 				</div>
 			</>
 		</section>

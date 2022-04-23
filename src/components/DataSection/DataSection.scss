@@ -5,11 +5,11 @@
 		display: flex;
 		flex-wrap: wrap;
 		margin: 5rem auto;
-		justify-content: center;
+		justify-content: space-evenly;
 		align-items: center;
 
 		// width: calc(min(80%, 600px));
-		width: 75%;
-		gap: 3rem;
+		width: 77%;
+		gap: 2rem;
 	}
 }

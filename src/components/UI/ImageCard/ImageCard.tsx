@@ -1,14 +1,17 @@
 import React from 'react';
 import './ImageCard.scss';
 
-const ImageCard = () => {
+interface ImageCardProps {
+	image: string;
+	alt: string;
+}
+
+const ImageCard = ({ image, alt }: ImageCardProps) => {
+	console.log(image);
+
 	return (
 		<div className="image--container">
-			<img
-				src="https://apod.nasa.gov/apod/image/2204/N11_HubbleLake_1600.jpg"
-				alt=""
-				className="nasa-images"
-			/>
+			<img src={image} alt={alt} className="nasa-images" />
 		</div>
 	);
 };
