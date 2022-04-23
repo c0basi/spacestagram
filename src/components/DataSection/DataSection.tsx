@@ -4,6 +4,7 @@ import './DataSection.scss';
 import { convertDateRange, setDefaultDate } from '../../utils/dateFunctions';
 import UtilityBar from '../UtilityBar/UtilityBar';
 import { getNasaData } from '../../utils/dateFunctions';
+import ImageCard from '../UI/ImageCard/ImageCard';
 const api_Key = 'EgxctQoITsGFJtjVAXfeldq6xEKnW6y9j4Wwm0IG';
 
 const DataSection = () => {
@@ -52,6 +53,13 @@ const DataSection = () => {
 				<button onClick={clickHandler}>Click</button>
 				{isLoading && <p>Loading...</p>}
 				{hasError && <p>error...</p>}
+				<div className="container--images">
+					<ImageCard />
+					<ImageCard />
+					<ImageCard />
+					<ImageCard />
+					<ImageCard />
+				</div>
 			</>
 		</section>
 	);
