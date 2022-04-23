@@ -11,13 +11,13 @@ export const parseSelectedDates = (selectedDate: string[]) => {
 };
 
 // sets the date range picker to the past week
-export const setDefaultDate = (stringVersion = false) => {
+export const setDefaultDate = (stringUse = false) => {
 	const currentDate = new Date();
 	const oneWeekAgo = new Date();
 	oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
 
 	// checks if we are using the string representation of date
-	const defaultDate = stringVersion
+	const defaultDate = stringUse
 		? [
 				...parseSelectedDates([
 					oneWeekAgo.toISOString(),
@@ -27,4 +27,11 @@ export const setDefaultDate = (stringVersion = false) => {
 		: [oneWeekAgo, currentDate];
 
 	return defaultDate;
+};
+
+export const isoStringToDate = (date: string) => {
+	const dates = date.split(',');
+	const newDate = new Date(dates[0]);
+	const newDate2 = new Date(dates[1]);
+	return [newDate, newDate2];
 };
