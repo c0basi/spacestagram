@@ -70,7 +70,7 @@ const DataSection = () => {
 							<ImageCard
 								key={index}
 								image={item.hdUrl ? item.hdUrl : item.url}
-								alt={item.title}
+								title={item.title}
 							/>
 						))}
 					{/* <ImageCard />
