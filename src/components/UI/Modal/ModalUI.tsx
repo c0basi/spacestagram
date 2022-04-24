@@ -1,4 +1,4 @@
-// import * as React from 'react';
+import ReactDOM from 'react-dom';
 // import Box from '@mui/material/Box';
 // import Button from '@mui/material/Button';
 // import Typography from '@mui/material/Typography';
@@ -61,8 +61,45 @@
 
 import React from 'react';
 
-const ModalUI = () => {
-	return <div></div>;
+interface ModalUIProps {
+	onClose: () => void;
+	children: React.ReactNode;
+}
+
+interface BackdropProps {
+	onClose: () => void;
+}
+
+interface ModalOverlayProps {
+	children: React.ReactNode;
+}
+
+const BackDrop = ({ onClose }: BackdropProps) => {
+	return <div className="backdrop" onClick={onClose}></div>;
+};
+
+const ModalOverlay = ({ children }: ModalOverlayProps) => {
+	return (
+		<div className="modal">
+			<div className="content">{children}</div>
+		</div>
+	);
+};
+
+const portalElement = document.getElementById('modal-overlays')!;
+const ModalUI = (props: ModalUIProps) => {
+	return (
+		<>
+			{ReactDOM.createPortal(
+				<BackDrop onClose={props.onClose} />,
+				portalElement
+			)}
+			{ReactDOM.createPortal(
+				<ModalOverlay>{props.children}</ModalOverlay>,
+				portalElement
+			)}
+		</>
+	);
 };
 
 export default ModalUI;
