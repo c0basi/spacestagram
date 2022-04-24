@@ -22,8 +22,8 @@
 		// top: 60%;
 		bottom: 0;
 		left: 0;
-		// background-color: #01727498;
-		background-color: #f4f4f4;
+		background-color: rgb(29, 28, 28);
+		// background-color: #f4f4f4;
 		width: 90%;
 		transform-origin: top;
 		opacity: 0;
@@ -33,13 +33,16 @@
 		&--title {
 			font-size: 2rem;
 			text-transform: uppercase;
-			color: black;
+			color: white;
+		}
+		&--icons svg {
+			font-size: 2.5rem;
 		}
 	}
 	&:hover &__content,
 	&:active &__content {
 		/* transform: scaleY(1); */
-		opacity: 0.6;
+		opacity: 0.9;
 	}
 
 	&:hover img,
@@ -65,3 +68,9 @@
 // 	filter: sepia(60%);
 // 	transform: scale(0.95);
 // }
+
+@media screen and (max-width: 640px) {
+	.image--container__content--title {
+		font-size: 1.3rem;
+	}
+}

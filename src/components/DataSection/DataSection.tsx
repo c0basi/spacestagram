@@ -15,6 +15,11 @@ const DataSection = () => {
 	const [dateRange, setDateRange] = useState<any[]>(setDefaultDate(true));
 	const [nasaPosts, setNasaPosts] = useState<Apod[]>([]);
 
+	// modal
+	const [openModal, setOpenModal] = useState(false);
+	const handleOpen = () => setOpenModal(true);
+	const handleClose = () => setOpenModal(false);
+
 	console.log('date range for data section', dateRange);
 
 	// get the startdate and end date from the utility bar component
@@ -71,6 +76,9 @@ const DataSection = () => {
 								key={index}
 								image={item.hdUrl ? item.hdUrl : item.url}
 								title={item.title}
+								onOpenModal={handleOpen}
+								onCloseModal={handleClose}
+								open={openModal}
 							/>
 						))}
 					{/* <ImageCard />
