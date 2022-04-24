@@ -12,8 +12,11 @@ interface ImageCardProps {
 	image: string;
 	title: string;
 	open: boolean;
+	description?: string;
+	date: string;
 	onOpenModal: () => void;
 	onCloseModal: () => void;
+	index: number;
 }
 
 const ImageCard = ({
@@ -21,12 +24,14 @@ const ImageCard = ({
 	title,
 	onOpenModal,
 	onCloseModal,
+	description,
+	date,
 	open,
+	index,
 }: ImageCardProps) => {
 	// const [openModal, setOpenModal] = useState(false);
 	// const handleOpen = () => setOpenModal(true);
 	// const handleClose = () => setOpenModal(false);
-	console.log(image);
 
 	return (
 		<>
@@ -47,9 +52,16 @@ const ImageCard = ({
 					</div>
 				</div>
 			</div>
-			{/* <BasicModal>
-				<Post />
-			</BasicModal> */}
+			{open && (
+				<Post
+					onCloseModal={onCloseModal}
+					date={date}
+					description={description}
+					title={title}
+					image={image}
+					index={index}
+				/>
+			)}
 		</>
 	);
 };

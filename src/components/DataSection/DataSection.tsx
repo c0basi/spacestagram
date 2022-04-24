@@ -6,6 +6,8 @@ import UtilityBar from '../UtilityBar/UtilityBar';
 import { getNasaData } from '../../utils/dateFunctions';
 import ImageCard from '../UI/ImageCard/ImageCard';
 import { Apod } from '../../types/Types';
+import { arraySort } from '../../utils/dateFunctions';
+import LoadingSpinner from '../UI/LoadingSpinner/LoadingSpinner';
 const api_Key = 'EgxctQoITsGFJtjVAXfeldq6xEKnW6y9j4Wwm0IG';
 
 const DataSection = () => {
@@ -15,7 +17,7 @@ const DataSection = () => {
 	const [dateRange, setDateRange] = useState<any[]>(setDefaultDate(true));
 	const [nasaPosts, setNasaPosts] = useState<Apod[]>([]);
 
-	// modal
+	// modal chanhe name of these handlers
 	const [openModal, setOpenModal] = useState(false);
 	const handleOpen = () => setOpenModal(true);
 	const handleClose = () => setOpenModal(false);
@@ -39,8 +41,13 @@ const DataSection = () => {
 			console.log('waiting for data');
 
 			console.log(data);
+			let fetchedData: Apod[] = [];
+
+			fetchedData = data;
+			fetchedData.sort((a, b) => arraySort(new Date(a.date), new Date(b.date)));
 			setIsLoading(false);
-			setNasaPosts(data);
+			setNasaPosts(fetchedData);
+			setHasError(false);
 		} catch (err) {
 			setIsLoading(false);
 			setHasError(true);
@@ -57,6 +64,8 @@ const DataSection = () => {
 		fetchData();
 	};
 
+	// console.log(nasaPosts[0].date);
+
 	// console.log('url is ', nasaPosts[0].title);
 
 	// console.log(`gotenthe posts`, nasaPosts[0]);
@@ -66,10 +75,10 @@ const DataSection = () => {
 			<>
 				<UtilityBar onDateChange={dateRangeHnadler} />
 				<button onClick={clickHandler}>Click</button>
-				{isLoading && <p>Loading...</p>}
 				{hasError && <p>error...</p>}
 				{nasaPosts.length}
 				<div className="container--images">
+					{isLoading && <LoadingSpinner />}
 					{!isLoading &&
 						nasaPosts.map((item, index) => (
 							<ImageCard
@@ -78,7 +87,10 @@ const DataSection = () => {
 								title={item.title}
 								onOpenModal={handleOpen}
 								onCloseModal={handleClose}
+								description={item.explanation}
+								date={item.date}
 								open={openModal}
+								index={index}
 							/>
 						))}
 					{/* <ImageCard />

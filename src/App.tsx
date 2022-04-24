@@ -13,7 +13,6 @@ function App() {
 			<div className="twinkling"></div> */}
 			<Animation />
 			<Header />
-			<div>Make some food</div>
 			<DataSection />
 			<Footer />
 		</div>

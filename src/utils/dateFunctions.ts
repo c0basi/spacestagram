@@ -50,3 +50,10 @@ export const getNasaData = (dateRange: string[]) => {
 	);
 	return req;
 };
+
+// sort an array of objects based on their dates
+export const arraySort = (a: Date, b: Date) => {
+	if (a < b) return 1;
+	if (a > b) return -1;
+	return 0;
+};

@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 // import Typography from '@mui/material/Typography';
 // import Modal from '@mui/material/Modal';
 // import { styled } from '@mui/material';
+import './ModalUI.scss';
 
 // interface ModalProps {
 // 	children: React.ReactNode;
@@ -86,7 +87,7 @@ const ModalOverlay = ({ children }: ModalOverlayProps) => {
 	);
 };
 
-const portalElement = document.getElementById('modal-overlays')!;
+const portalElement = document.getElementById('modal-overlay')!;
 const ModalUI = (props: ModalUIProps) => {
 	return (
 		<>
