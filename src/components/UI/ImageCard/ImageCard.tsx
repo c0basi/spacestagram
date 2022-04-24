@@ -5,7 +5,8 @@ import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import InfoIcon from '@mui/icons-material/Info';
 import React from 'react';
 import './ImageCard.scss';
-import BasicModal from './Modal/ModalUI';
+import BasicModal from '../Modal/ModalUI';
+import Post from '../CardContent/CardContent';
 
 interface ImageCardProps {
 	image: string;
@@ -46,7 +47,9 @@ const ImageCard = ({
 					</div>
 				</div>
 			</div>
-			<BasicModal />
+			{/* <BasicModal>
+				<Post />
+			</BasicModal> */}
 		</>
 	);
 };
