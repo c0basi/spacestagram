@@ -67,45 +67,53 @@ const Post = ({
 
 	console.log(index);
 
+	// changing thr modalui onclose
+
 	return (
-		<ModalUI onClose={onCloseModal}>
-			<Card>
-				<CardHeader
-					// action={
-					// 	<IconButton aria-label="settings" onClick={onCloseModal}>
-					// 		<CancelIcon color="error" />
-					// 	</IconButton>
-					// }
-					title={title}
-					subheader={date}
-				/>
-				<CardMedia component="img" height="20%" image={image} alt={title} />
-				<CardContent>
-					<Typography variant="body2" color="text.secondary">
-						{description ? description : 'No description provided'}
-					</Typography>
-				</CardContent>
-				<CardActions disableSpacing>
-					<IconButton aria-label="add to favorites" onClick={handleClick}>
-						<Checkbox
-							icon={<FavoriteBorder />}
-							checkedIcon={<Favorite sx={{ color: 'red' }} />}
-						/>
-					</IconButton>
-					<IconButton aria-label="share">
-						<ShareIcon />
-					</IconButton>
-					<ExpandMore
-						expand={expanded}
-						onClick={handleExpandClick}
-						aria-expanded={expanded}
-						aria-label="show more"
-					>
-						<ExpandMoreIcon />
-					</ExpandMore>
-				</CardActions>
-			</Card>
-		</ModalUI>
+		// <ModalUI onClose={onCloseModal}>
+		<Card>
+			<CardHeader
+				// action={
+				// 	<IconButton aria-label="settings" onClick={onCloseModal}>
+				// 		<CancelIcon color="error" />
+				// 	</IconButton>
+				// }
+				title={title}
+				subheader={date}
+			/>
+			<CardMedia
+				component="img"
+				height="350px"
+				image={image}
+				alt={title}
+				// sx={{ objectFit: 'contain' }}
+			/>
+			<CardContent>
+				<Typography variant="h6" color="text.primary">
+					{description ? description : 'No description provided'}
+				</Typography>
+			</CardContent>
+			<CardActions disableSpacing>
+				<IconButton aria-label="add to favorites" onClick={handleClick}>
+					<Checkbox
+						icon={<FavoriteBorder />}
+						checkedIcon={<Favorite sx={{ color: 'red' }} />}
+					/>
+				</IconButton>
+				<IconButton aria-label="share">
+					<ShareIcon />
+				</IconButton>
+				<ExpandMore
+					expand={expanded}
+					onClick={handleExpandClick}
+					aria-expanded={expanded}
+					aria-label="show more"
+				>
+					<ExpandMoreIcon />
+				</ExpandMore>
+			</CardActions>
+		</Card>
+		// </ModalUI>
 	);
 };
 

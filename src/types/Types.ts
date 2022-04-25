@@ -14,5 +14,5 @@ export interface Apod {
 	url: string;
 	thumbnailUrl?: string;
 	// used track the post user have liked
-	// isLiked?: boolean;
+	isLiked?: boolean;
 }

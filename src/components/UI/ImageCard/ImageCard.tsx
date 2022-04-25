@@ -3,7 +3,7 @@ import IconButton from '@mui/material/IconButton';
 import Favorite from '@mui/icons-material/Favorite';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import InfoIcon from '@mui/icons-material/Info';
-import React from 'react';
+import React, { useState } from 'react';
 import './ImageCard.scss';
 import BasicModal from '../Modal/ModalUI';
 import Post from '../CardContent/CardContent';
@@ -29,9 +29,9 @@ const ImageCard = ({
 	open,
 	index,
 }: ImageCardProps) => {
-	// const [openModal, setOpenModal] = useState(false);
-	// const handleOpen = () => setOpenModal(true);
-	// const handleClose = () => setOpenModal(false);
+	const [openModal, setOpenModal] = useState(false);
+	const handleOpen = () => setOpenModal(true);
+	const handleClose = () => setOpenModal(false);
 
 	return (
 		<>
@@ -46,13 +46,29 @@ const ImageCard = ({
 								checkedIcon={<Favorite sx={{ color: 'red' }} />}
 							/>
 						</IconButton>
-						<IconButton aria-label="more info" onClick={onOpenModal}>
+
+						<IconButton aria-label="more info" onClick={handleOpen}>
 							<InfoIcon sx={{ color: 'white' }} />
 						</IconButton>
+						<BasicModal
+							handleClose={handleClose}
+							open={openModal}
+							handleOpen={handleOpen}
+						>
+							<Post
+								onCloseModal={onCloseModal}
+								date={date}
+								description={description}
+								title={title}
+								image={image}
+								index={index}
+							/>
+						</BasicModal>
 					</div>
 				</div>
 			</div>
-			{open && (
+			{/* commented this out */}
+			{/* {open && (
 				<Post
 					onCloseModal={onCloseModal}
 					date={date}
@@ -61,7 +77,7 @@ const ImageCard = ({
 					image={image}
 					index={index}
 				/>
-			)}
+			)} */}
 		</>
 	);
 };
