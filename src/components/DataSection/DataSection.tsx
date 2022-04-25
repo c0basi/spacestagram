@@ -64,6 +64,10 @@ const DataSection = () => {
 		fetchData();
 	};
 
+	const likeHnadler = (index: number) => {
+		// chan
+	};
+
 	// console.log(nasaPosts[0].date);
 
 	// console.log('url is ', nasaPosts[0].title);
