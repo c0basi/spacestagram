@@ -18,6 +18,7 @@ interface ImageCardProps {
 	onCloseModal: () => void;
 	onClickLike: () => void;
 	index: number;
+	isLiked?: boolean;
 }
 
 const ImageCard = ({
@@ -30,6 +31,7 @@ const ImageCard = ({
 	date,
 	open,
 	index,
+	isLiked,
 }: ImageCardProps) => {
 	const [openModal, setOpenModal] = useState(false);
 	const handleOpen = () => setOpenModal(true);
@@ -43,10 +45,15 @@ const ImageCard = ({
 					<h3 className="image--container__content--title">{title}</h3>
 					<div className="image--container__content--icons">
 						<IconButton aria-label="add to likes" onClick={onClickLike}>
-							<Checkbox
+							{isLiked ? (
+								<Favorite sx={{ color: 'red' }} />
+							) : (
+								<Favorite sx={{ color: 'white' }} />
+							)}
+							{/* <Checkbox
 								icon={<Favorite sx={{ color: 'white' }} />}
 								checkedIcon={<Favorite sx={{ color: 'red' }} />}
-							/>
+							/> */}
 						</IconButton>
 
 						<IconButton aria-label="more info" onClick={handleOpen}>

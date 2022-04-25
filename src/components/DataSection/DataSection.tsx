@@ -167,6 +167,7 @@ const DataSection = () => {
 								date={item.date}
 								open={openModal}
 								index={index}
+								isLiked={item.isLiked}
 								onClickLike={likeButtonHandler.bind(this, index)}
 							/>
 						))}
@@ -181,6 +182,7 @@ const DataSection = () => {
 								description={item.explanation}
 								date={item.date}
 								open={openModal}
+								isLiked={item.isLiked}
 								index={index}
 								onClickLike={removeLikeHandler.bind(this, index)}
 							/>
