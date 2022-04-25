@@ -35,6 +35,14 @@ const DataSection = () => {
 	const earthDates = convertDateRange(dateRange);
 	console.log(earthDates);
 
+	const showExploreHandler = () => {
+		setShowExplorePage(true);
+	};
+
+	const showLikedHandler = () => {
+		setShowExplorePage(false);
+	};
+
 	const fetchData = async () => {
 		try {
 			setIsLoading(true);
@@ -62,10 +70,6 @@ const DataSection = () => {
 	useEffect(() => {
 		fetchData();
 	}, [dateRange]);
-
-	const clickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
-		fetchData();
-	};
 
 	// liked posts before like handler
 	console.log('liked posts before like handler');
@@ -109,6 +113,28 @@ const DataSection = () => {
 		console.log(likedNasaPosts);
 	};
 
+	const removeLikeHandler = (index: number) => {
+		const postToRemove: Apod = {
+			...likedNasaPosts[index],
+			isLiked: !likedNasaPosts[index].isLiked,
+		};
+		let tempNasaPosts = [...nasaPosts];
+		let tempLikedNasaPosts = [...likedNasaPosts];
+		tempLikedNasaPosts[index] = postToRemove;
+
+		// find the index of the post to be unliked from the nasaPosts
+		const unlikedPostIndex = nasaPosts.findIndex(
+			(post) => post.title === likedNasaPosts[index].title
+		);
+		tempNasaPosts[unlikedPostIndex] = postToRemove;
+
+		//filter out all unliked posts from likedNasaPosts
+		tempLikedNasaPosts = tempLikedNasaPosts.filter((post) => post.isLiked);
+
+		setNasaPosts(tempNasaPosts);
+		setLikedNasaPosts(tempLikedNasaPosts);
+	};
+
 	// console.log(nasaPosts[0].date);
 	// console.log(nasaPosts);
 
@@ -122,13 +148,14 @@ const DataSection = () => {
 				<UtilityBar
 					onDateChange={dateRangeHnadler}
 					likes={likedNasaPosts.length}
+					onClickExplore={showExploreHandler}
+					onClickLikes={showLikedHandler}
 				/>
-				<button onClick={clickHandler}>Click</button>
 				{hasError && <p>error...</p>}
 				{nasaPosts.length}
 				<div className="container--images">
 					{isLoading && <LoadingSpinner />}
-					{!isLoading &&
+					{showExplorePage &&
 						nasaPosts.map((item, index) => (
 							<ImageCard
 								key={index}
@@ -141,6 +168,21 @@ const DataSection = () => {
 								open={openModal}
 								index={index}
 								onClickLike={likeButtonHandler.bind(this, index)}
+							/>
+						))}
+					{!showExplorePage &&
+						likedNasaPosts.map((item, index) => (
+							<ImageCard
+								key={index}
+								image={item.hdUrl ? item.hdUrl : item.url}
+								title={item.title}
+								onOpenModal={handleOpen}
+								onCloseModal={handleClose}
+								description={item.explanation}
+								date={item.date}
+								open={openModal}
+								index={index}
+								onClickLike={removeLikeHandler.bind(this, index)}
 							/>
 						))}
 					{/* <ImageCard />

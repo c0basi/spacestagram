@@ -12,9 +12,16 @@ import './UtilityBar.scss';
 interface UtilityBarProps {
 	onDateChange: (daterange: string[]) => void;
 	likes: number;
+	onClickExplore: () => void;
+	onClickLikes: () => void;
 }
 
-const UtilityBar = ({ onDateChange, likes }: UtilityBarProps) => {
+const UtilityBar = ({
+	onDateChange,
+	likes,
+	onClickExplore,
+	onClickLikes,
+}: UtilityBarProps) => {
 	const [date, setDate] = React.useState<any[]>(setDefaultDate(false));
 
 	const handleSelectedDate = (date: Date[]) => {
@@ -25,8 +32,10 @@ const UtilityBar = ({ onDateChange, likes }: UtilityBarProps) => {
 	return (
 		<div className="utility">
 			<div className="utility__actions">
-				<h2 className="uitlity__actions--title">Explore</h2>
-				<IconButton aria-label="delete">
+				<h2 className="uitlity__actions--title" onClick={onClickExplore}>
+					Explore
+				</h2>
+				<IconButton aria-label="likes" onClick={onClickLikes}>
 					<Badge badgeContent={likes} color="error">
 						<FavoriteBorder color="error" />
 					</Badge>
