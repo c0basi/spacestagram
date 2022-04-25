@@ -1,16 +1,20 @@
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import { Button } from '@mui/material';
 import Badge from '@mui/material/Badge';
 import IconButton from '@mui/material/IconButton';
 import DateRangePicker from '@wojtekmaj/react-daterange-picker';
 import React from 'react';
 import { setDefaultDate } from '../../utils/dateFunctions';
+import Favorite from '@mui/icons-material/Favorite';
+import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import './UtilityBar.scss';
 
 interface UtilityBarProps {
 	onDateChange: (daterange: string[]) => void;
+	likes: number;
 }
 
-const UtilityBar = ({ onDateChange }: UtilityBarProps) => {
+const UtilityBar = ({ onDateChange, likes }: UtilityBarProps) => {
 	const [date, setDate] = React.useState<any[]>(setDefaultDate(false));
 
 	const handleSelectedDate = (date: Date[]) => {
@@ -23,8 +27,8 @@ const UtilityBar = ({ onDateChange }: UtilityBarProps) => {
 			<div className="utility__actions">
 				<h2 className="uitlity__actions--title">Explore</h2>
 				<IconButton aria-label="delete">
-					<Badge badgeContent={4} color="error">
-						<ThumbUpIcon />
+					<Badge badgeContent={likes} color="error">
+						<FavoriteBorder color="error" />
 					</Badge>
 				</IconButton>
 			</div>

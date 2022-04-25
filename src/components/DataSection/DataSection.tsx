@@ -16,6 +16,8 @@ const DataSection = () => {
 	const [errorMessage, setErrorMessage] = useState<null | string>(null);
 	const [dateRange, setDateRange] = useState<any[]>(setDefaultDate(true));
 	const [nasaPosts, setNasaPosts] = useState<Apod[]>([]);
+	const [likedNasaPosts, setLikedNasaPosts] = useState<Apod[]>([]);
+	const [showExplorePage, setShowExplorePage] = useState(true);
 
 	// modal chanhe name of these handlers
 	const [openModal, setOpenModal] = useState(false);
@@ -44,6 +46,7 @@ const DataSection = () => {
 			let fetchedData: Apod[] = [];
 
 			fetchedData = data;
+			fetchedData.map((item) => (item.isLiked = false));
 			fetchedData.sort((a, b) => arraySort(new Date(a.date), new Date(b.date)));
 			setIsLoading(false);
 			setNasaPosts(fetchedData);
@@ -64,11 +67,50 @@ const DataSection = () => {
 		fetchData();
 	};
 
-	const likeHnadler = (index: number) => {
-		// chan
+	// liked posts before like handler
+	console.log('liked posts before like handler');
+
+	console.log(likedNasaPosts);
+	const likeButtonHandler = (index: number) => {
+		// change like property of the nasa post
+		const likedNasaPost = {
+			...nasaPosts[index],
+			isLiked: !nasaPosts[index].isLiked,
+		};
+		console.log('liked post');
+
+		console.log(likedNasaPost);
+
+		// update the content of the . needs work here
+		const tempNasaPosts = [...nasaPosts];
+		tempNasaPosts[index] = likedNasaPost;
+		let tempLikedNasaPosts = [...likedNasaPosts];
+
+		const existingPostIndex = likedNasaPosts.findIndex(
+			(post) => post.title === nasaPosts[index].title
+		);
+
+		if (existingPostIndex !== -1) {
+			if (likedNasaPost.isLiked) {
+				tempLikedNasaPosts[existingPostIndex] = likedNasaPost;
+			} else {
+				// remove post from likedNasaPost if isLiked is  false
+				tempLikedNasaPosts[existingPostIndex] = likedNasaPost;
+				tempLikedNasaPosts = tempLikedNasaPosts.filter(
+					(post) => post.title !== likedNasaPost.title
+				);
+			}
+		} else {
+			tempLikedNasaPosts = [...tempLikedNasaPosts, likedNasaPost];
+		}
+
+		setNasaPosts(tempNasaPosts);
+		setLikedNasaPosts(tempLikedNasaPosts);
+		console.log(likedNasaPosts);
 	};
 
 	// console.log(nasaPosts[0].date);
+	// console.log(nasaPosts);
 
 	// console.log('url is ', nasaPosts[0].title);
 
@@ -77,7 +119,10 @@ const DataSection = () => {
 	return (
 		<section className="container">
 			<>
-				<UtilityBar onDateChange={dateRangeHnadler} />
+				<UtilityBar
+					onDateChange={dateRangeHnadler}
+					likes={likedNasaPosts.length}
+				/>
 				<button onClick={clickHandler}>Click</button>
 				{hasError && <p>error...</p>}
 				{nasaPosts.length}
@@ -95,6 +140,7 @@ const DataSection = () => {
 								date={item.date}
 								open={openModal}
 								index={index}
+								onClickLike={likeButtonHandler.bind(this, index)}
 							/>
 						))}
 					{/* <ImageCard />

@@ -16,6 +16,7 @@ interface ImageCardProps {
 	date: string;
 	onOpenModal: () => void;
 	onCloseModal: () => void;
+	onClickLike: () => void;
 	index: number;
 }
 
@@ -24,6 +25,7 @@ const ImageCard = ({
 	title,
 	onOpenModal,
 	onCloseModal,
+	onClickLike,
 	description,
 	date,
 	open,
@@ -40,7 +42,7 @@ const ImageCard = ({
 				<div className="image--container__content">
 					<h3 className="image--container__content--title">{title}</h3>
 					<div className="image--container__content--icons">
-						<IconButton aria-label="add to likes">
+						<IconButton aria-label="add to likes" onClick={onClickLike}>
 							<Checkbox
 								icon={<Favorite sx={{ color: 'white' }} />}
 								checkedIcon={<Favorite sx={{ color: 'red' }} />}
