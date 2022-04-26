@@ -17,9 +17,9 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Checkbox from '@mui/material/Checkbox';
 import { styled } from '@mui/material/styles';
 import { Favorite } from '@mui/icons-material';
-import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import CancelIcon from '@mui/icons-material/Cancel';
-import ModalUI from '../Modal/ModalUI';
+import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+// import ModalUI from '../Modal/ModalUI';
 
 interface PostProps {
 	onCloseModal: () => void;
@@ -28,6 +28,8 @@ interface PostProps {
 	description?: string;
 	image: string;
 	index: number;
+	isLiked?: boolean;
+	onClickLike: () => void;
 }
 
 interface ExpandMoreProps extends IconButtonProps {
@@ -48,24 +50,26 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 // add post props after
 const Post = ({
 	onCloseModal,
+	onClickLike,
 	title,
 	description,
 	date,
 	image,
 	index,
+	isLiked,
 }: PostProps) => {
-	const [expanded, setExpanded] = React.useState(false);
+	// const [expanded, setExpanded] = React.useState(false);
 
-	const handleExpandClick = () => {
-		setExpanded(!expanded);
-	};
+	// const handleExpandClick = () => {
+	// 	setExpanded(!expanded);
+	// };
 
-	const handleClick = () => {
-		console.log('clicked');
-	};
-	console.log('data for specific componet');
+	// const handleClick = () => {
+	// 	console.log('clicked');
+	// };
+	// console.log('data for specific componet');
 
-	console.log(index);
+	// console.log(index);
 
 	// changing thr modalui onclose
 
@@ -73,11 +77,11 @@ const Post = ({
 		// <ModalUI onClose={onCloseModal}>
 		<Card>
 			<CardHeader
-				// action={
-				// 	<IconButton aria-label="settings" onClick={onCloseModal}>
-				// 		<CancelIcon color="error" />
-				// 	</IconButton>
-				// }
+				action={
+					<IconButton aria-label="settings" onClick={onCloseModal}>
+						<CancelIcon color="error" />
+					</IconButton>
+				}
 				title={title}
 				subheader={date}
 			/>
@@ -94,23 +98,17 @@ const Post = ({
 				</Typography>
 			</CardContent>
 			<CardActions disableSpacing>
-				<IconButton aria-label="add to favorites" onClick={handleClick}>
-					<Checkbox
-						icon={<FavoriteBorder />}
-						checkedIcon={<Favorite sx={{ color: 'red' }} />}
-					/>
+				<IconButton aria-label="add to likes" onClick={onClickLike}>
+					{isLiked ? (
+						<Favorite sx={{ color: 'red' }} />
+					) : (
+						<FavoriteBorder sx={{ color: 'red' }} />
+					)}
 				</IconButton>
+
 				<IconButton aria-label="share">
 					<ShareIcon />
 				</IconButton>
-				<ExpandMore
-					expand={expanded}
-					onClick={handleExpandClick}
-					aria-expanded={expanded}
-					aria-label="show more"
-				>
-					<ExpandMoreIcon />
-				</ExpandMore>
 			</CardActions>
 		</Card>
 		// </ModalUI>

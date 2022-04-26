@@ -5,7 +5,7 @@ import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import InfoIcon from '@mui/icons-material/Info';
 import React, { useState } from 'react';
 import './ImageCard.scss';
-import BasicModal from '../Modal/ModalUI';
+import BasicModal from '../../UI/Modal/ModalUI';
 import Post from '../CardContent/CardContent';
 
 interface ImageCardProps {
@@ -65,12 +65,14 @@ const ImageCard = ({
 							handleOpen={handleOpen}
 						>
 							<Post
-								onCloseModal={onCloseModal}
+								onCloseModal={handleClose}
 								date={date}
 								description={description}
 								title={title}
 								image={image}
 								index={index}
+								isLiked={isLiked}
+								onClickLike={onClickLike}
 							/>
 						</BasicModal>
 					</div>

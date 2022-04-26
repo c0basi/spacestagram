@@ -59,6 +59,7 @@ export default function BasicModal({
 				<InfoIcon sx={{ color: 'white' }} />
 			</IconButton> */}
 			<StyledModal
+				disableEscapeKeyDown={true}
 				BackdropProps={{
 					style: { backgroundColor: 'rgba(255,255,255,0.3) ' },
 				}}

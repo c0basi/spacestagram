@@ -4,11 +4,11 @@ import './DataSection.scss';
 import { convertDateRange, setDefaultDate } from '../../utils/dateFunctions';
 import UtilityBar from '../UtilityBar/UtilityBar';
 import { getNasaData } from '../../utils/dateFunctions';
-import ImageCard from '../UI/ImageCard/ImageCard';
+import ImageCard from '../../UI/ImageCard/ImageCard';
 import { Apod } from '../../types/Types';
 import { arraySort } from '../../utils/dateFunctions';
-import LoadingSpinner from '../UI/LoadingSpinner/LoadingSpinner';
-import MessageModal from '../UI/MessageModal/MessageModal';
+import LoadingSpinner from '../../UI/LoadingSpinner/LoadingSpinner';
+import MessageModal from '../../UI/MessageModal/MessageModal';
 const api_Key = 'EgxctQoITsGFJtjVAXfeldq6xEKnW6y9j4Wwm0IG';
 
 const DataSection = () => {
