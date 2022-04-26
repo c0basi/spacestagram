@@ -8,6 +8,7 @@ import ImageCard from '../UI/ImageCard/ImageCard';
 import { Apod } from '../../types/Types';
 import { arraySort } from '../../utils/dateFunctions';
 import LoadingSpinner from '../UI/LoadingSpinner/LoadingSpinner';
+import ErrorModal from '../UI/ErrorModal/ErrorModal';
 const api_Key = 'EgxctQoITsGFJtjVAXfeldq6xEKnW6y9j4Wwm0IG';
 
 const DataSection = () => {
@@ -63,7 +64,7 @@ const DataSection = () => {
 			setIsLoading(false);
 			setHasError(true);
 			console.log(err);
-			setErrorMessage(err as string);
+			setErrorMessage(String(err));
 		}
 	};
 
@@ -142,6 +143,16 @@ const DataSection = () => {
 
 	// console.log(`gotenthe posts`, nasaPosts[0]);
 
+	// const Result = () => {
+	// 	if(isLoading){
+	// 		return (<LoadingSpinner />)
+	// 	}
+	// 	if(!isLoading &&
+	// 		showExplorePage && nasaPosts)
+	// }
+
+	console.log(errorMessage);
+
 	return (
 		<section className="container">
 			<>
@@ -151,11 +162,12 @@ const DataSection = () => {
 					onClickExplore={showExploreHandler}
 					onClickLikes={showLikedHandler}
 				/>
-				{hasError && <p>error...</p>}
+				{hasError && <ErrorModal message={errorMessage} />}
 				{nasaPosts.length}
 				<div className="container--images">
 					{isLoading && <LoadingSpinner />}
-					{showExplorePage &&
+					{!isLoading &&
+						showExplorePage &&
 						nasaPosts.map((item, index) => (
 							<ImageCard
 								key={index}
