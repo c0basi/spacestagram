@@ -1,0 +1,14 @@
+.message {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 1.5rem;
+	font-size: 1.8rem;
+	background-color: #f4f4f4;
+	color: black;
+	// margin: auto auto;
+}
+
+.error {
+	color: red;
+}

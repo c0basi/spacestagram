@@ -8,7 +8,7 @@ import ImageCard from '../UI/ImageCard/ImageCard';
 import { Apod } from '../../types/Types';
 import { arraySort } from '../../utils/dateFunctions';
 import LoadingSpinner from '../UI/LoadingSpinner/LoadingSpinner';
-import ErrorModal from '../UI/ErrorModal/ErrorModal';
+import MessageModal from '../UI/MessageModal/MessageModal';
 const api_Key = 'EgxctQoITsGFJtjVAXfeldq6xEKnW6y9j4Wwm0IG';
 
 const DataSection = () => {
@@ -143,13 +143,59 @@ const DataSection = () => {
 
 	// console.log(`gotenthe posts`, nasaPosts[0]);
 
-	// const Result = () => {
-	// 	if(isLoading){
-	// 		return (<LoadingSpinner />)
-	// 	}
-	// 	if(!isLoading &&
-	// 		showExplorePage && nasaPosts)
-	// }
+	const Result = () => {
+		if (isLoading) {
+			return <LoadingSpinner />;
+		}
+		if (hasError) {
+			return <MessageModal message={errorMessage} error={true} />;
+		}
+		if (!isLoading && showExplorePage) {
+			return (
+				<>
+					{nasaPosts.map((item, index) => (
+						<ImageCard
+							key={index}
+							image={item.hdUrl ? item.hdUrl : item.url}
+							title={item.title}
+							onOpenModal={handleOpen}
+							onCloseModal={handleClose}
+							description={item.explanation}
+							date={item.date}
+							open={openModal}
+							index={index}
+							isLiked={item.isLiked}
+							onClickLike={likeButtonHandler.bind(this, index)}
+						/>
+					))}
+				</>
+			);
+		} else {
+			return (
+				<>
+					{likedNasaPosts.length < 1 ? (
+						<MessageModal message={'No liked photos'} />
+					) : (
+						likedNasaPosts.map((item, index) => (
+							<ImageCard
+								key={index}
+								image={item.hdUrl ? item.hdUrl : item.url}
+								title={item.title}
+								onOpenModal={handleOpen}
+								onCloseModal={handleClose}
+								description={item.explanation}
+								date={item.date}
+								open={openModal}
+								isLiked={item.isLiked}
+								index={index}
+								onClickLike={removeLikeHandler.bind(this, index)}
+							/>
+						))
+					)}
+				</>
+			);
+		}
+	};
 
 	console.log(errorMessage);
 
@@ -162,10 +208,9 @@ const DataSection = () => {
 					onClickExplore={showExploreHandler}
 					onClickLikes={showLikedHandler}
 				/>
-				{hasError && <ErrorModal message={errorMessage} />}
 				{nasaPosts.length}
 				<div className="container--images">
-					{isLoading && <LoadingSpinner />}
+					{/* {isLoading && <LoadingSpinner />}
 					{!isLoading &&
 						showExplorePage &&
 						nasaPosts.map((item, index) => (
@@ -198,7 +243,8 @@ const DataSection = () => {
 								index={index}
 								onClickLike={removeLikeHandler.bind(this, index)}
 							/>
-						))}
+						))} */}
+					<Result />
 					{/* <ImageCard />
 					<ImageCard />
 					<ImageCard />
