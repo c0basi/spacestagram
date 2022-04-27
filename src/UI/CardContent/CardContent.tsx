@@ -62,11 +62,16 @@ const Post = ({
 		setExpanded(!expanded);
 	};
 
+	const likeClickHandler = (ev: React.MouseEvent<HTMLButtonElement>) => {
+		ev.stopPropagation();
+		onCloseModal();
+	};
+
 	return (
 		<Card className="ModalCard">
 			<CardHeader
 				action={
-					<IconButton aria-label="settings" onClick={onCloseModal}>
+					<IconButton aria-label="settings" onClick={likeClickHandler}>
 						<CancelIcon color="error" />
 					</IconButton>
 				}

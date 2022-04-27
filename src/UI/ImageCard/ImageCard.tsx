@@ -1,21 +1,16 @@
-import Checkbox from '@mui/material/Checkbox';
-import IconButton from '@mui/material/IconButton';
 import Favorite from '@mui/icons-material/Favorite';
-import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import InfoIcon from '@mui/icons-material/Info';
+import IconButton from '@mui/material/IconButton';
 import React, { useState } from 'react';
-import './ImageCard.scss';
 import BasicModal from '../../UI/Modal/ModalUI';
 import Post from '../CardContent/CardContent';
+import './ImageCard.scss';
 
 interface ImageCardProps {
 	image: string;
 	title: string;
-	// open: boolean;
 	description?: string;
 	date: string;
-	// onOpenModal: () => void;
-	// onCloseModal: () => void;
 	onClickLike: () => void;
 	isLiked?: boolean;
 }

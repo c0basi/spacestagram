@@ -11,6 +11,7 @@ import {
 } from '../../utils/dateFunctions';
 import UtilityBar from '../UtilityBar/UtilityBar';
 import './DataSection.scss';
+import { MediaType } from '../../types/Types';
 const api_Key = 'EgxctQoITsGFJtjVAXfeldq6xEKnW6y9j4Wwm0IG';
 
 const DataSection = () => {
@@ -139,14 +140,15 @@ const DataSection = () => {
 					{nasaPosts.map((item, index) => (
 						<ImageCard
 							key={index}
-							image={item.hdUrl ? item.hdUrl : item.url}
+							//  maybe make the component be an iframe instead of an image for videos ??
+							image={
+								item.media_type === MediaType.IMAGE
+									? item.hdurl
+									: item.thumbnail_url!
+							}
 							title={item.title}
-							// onOpenModal={handleOpen}
-							// onCloseModal={handleClose}
 							description={item.explanation}
 							date={item.date}
-							// open={openModal}
-
 							isLiked={item.isLiked}
 							onClickLike={likeButtonHandler.bind(this, index)}
 						/>
@@ -162,7 +164,12 @@ const DataSection = () => {
 						likedNasaPosts.map((item, index) => (
 							<ImageCard
 								key={index}
-								image={item.hdUrl ? item.hdUrl : item.url}
+								//  maybe make the component be an iframe instead of an image for videos ??
+								image={
+									item.media_type === MediaType.IMAGE
+										? item.hdurl
+										: item.thumbnail_url!
+								}
 								title={item.title}
 								description={item.explanation}
 								date={item.date}
@@ -175,6 +182,8 @@ const DataSection = () => {
 			);
 		}
 	};
+
+	console.log(likedNasaPosts);
 
 	return (
 		<section className="container">

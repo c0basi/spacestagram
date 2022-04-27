@@ -7,12 +7,11 @@ export interface Apod {
 	copyright?: string;
 	date: string;
 	explanation?: string;
-	hdUrl: string;
-	mediaType?: MediaType;
+	hdurl: string;
+	media_type?: MediaType;
 	serviceVersion?: string;
 	title: string;
 	url: string;
-	thumbnailUrl?: string;
-	// used track the post user have liked
+	thumbnail_url?: string;
 	isLiked?: boolean;
 }
