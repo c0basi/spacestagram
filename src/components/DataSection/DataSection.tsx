@@ -21,9 +21,9 @@ const DataSection = () => {
 	const [showExplorePage, setShowExplorePage] = useState(true);
 
 	// modal chanhe name of these handlers
-	const [openModal, setOpenModal] = useState(false);
-	const handleOpen = () => setOpenModal(true);
-	const handleClose = () => setOpenModal(false);
+	// const [openModal, setOpenModal] = useState(false);
+	// const handleOpen = () => setOpenModal(true);
+	// const handleClose = () => setOpenModal(false);
 
 	console.log('date range for data section', dateRange);
 
@@ -158,12 +158,12 @@ const DataSection = () => {
 							key={index}
 							image={item.hdUrl ? item.hdUrl : item.url}
 							title={item.title}
-							onOpenModal={handleOpen}
-							onCloseModal={handleClose}
+							// onOpenModal={handleOpen}
+							// onCloseModal={handleClose}
 							description={item.explanation}
 							date={item.date}
-							open={openModal}
-							index={index}
+							// open={openModal}
+
 							isLiked={item.isLiked}
 							onClickLike={likeButtonHandler.bind(this, index)}
 						/>
@@ -181,13 +181,9 @@ const DataSection = () => {
 								key={index}
 								image={item.hdUrl ? item.hdUrl : item.url}
 								title={item.title}
-								onOpenModal={handleOpen}
-								onCloseModal={handleClose}
 								description={item.explanation}
 								date={item.date}
-								open={openModal}
 								isLiked={item.isLiked}
-								index={index}
 								onClickLike={removeLikeHandler.bind(this, index)}
 							/>
 						))
@@ -245,11 +241,6 @@ const DataSection = () => {
 							/>
 						))} */}
 					<Result />
-					{/* <ImageCard />
-					<ImageCard />
-					<ImageCard />
-					<ImageCard />
-					<ImageCard /> */}
 				</div>
 			</>
 		</section>

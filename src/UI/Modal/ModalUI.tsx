@@ -49,15 +49,8 @@ export default function BasicModal({
 	handleClose,
 	open,
 }: ModalProps) {
-	// const [open, setOpen] = React.useState(false);
-	// const handleOpen = () => setOpen(true);
-	// const handleClose = () => setOpen(false);
-
 	return (
 		<div>
-			{/* <IconButton aria-label="more info" onClick={handleOpen}>
-				<InfoIcon sx={{ color: 'white' }} />
-			</IconButton> */}
 			<StyledModal
 				disableEscapeKeyDown={true}
 				BackdropProps={{

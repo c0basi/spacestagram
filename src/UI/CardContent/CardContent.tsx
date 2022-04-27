@@ -27,25 +27,9 @@ interface PostProps {
 	date: string;
 	description?: string;
 	image: string;
-	index: number;
 	isLiked?: boolean;
 	onClickLike: () => void;
 }
-
-interface ExpandMoreProps extends IconButtonProps {
-	expand: boolean;
-}
-
-const ExpandMore = styled((props: ExpandMoreProps) => {
-	const { expand, ...other } = props;
-	return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-	transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-	marginLeft: 'auto',
-	transition: theme.transitions.create('transform', {
-		duration: theme.transitions.duration.shortest,
-	}),
-}));
 
 // add post props after
 const Post = ({
@@ -55,7 +39,6 @@ const Post = ({
 	description,
 	date,
 	image,
-	index,
 	isLiked,
 }: PostProps) => {
 	// const [expanded, setExpanded] = React.useState(false);

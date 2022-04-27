@@ -11,26 +11,21 @@ import Post from '../CardContent/CardContent';
 interface ImageCardProps {
 	image: string;
 	title: string;
-	open: boolean;
+	// open: boolean;
 	description?: string;
 	date: string;
-	onOpenModal: () => void;
-	onCloseModal: () => void;
+	// onOpenModal: () => void;
+	// onCloseModal: () => void;
 	onClickLike: () => void;
-	index: number;
 	isLiked?: boolean;
 }
 
 const ImageCard = ({
 	image,
 	title,
-	onOpenModal,
-	onCloseModal,
 	onClickLike,
 	description,
 	date,
-	open,
-	index,
 	isLiked,
 }: ImageCardProps) => {
 	const [openModal, setOpenModal] = useState(false);
@@ -70,7 +65,6 @@ const ImageCard = ({
 								description={description}
 								title={title}
 								image={image}
-								index={index}
 								isLiked={isLiked}
 								onClickLike={onClickLike}
 							/>
