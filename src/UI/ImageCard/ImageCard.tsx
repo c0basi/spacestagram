@@ -54,11 +54,7 @@ const ImageCard = ({
 						<IconButton aria-label="more info" onClick={handleOpen}>
 							<InfoIcon sx={{ color: 'white' }} />
 						</IconButton>
-						<BasicModal
-							handleClose={handleClose}
-							open={openModal}
-							handleOpen={handleOpen}
-						>
+						<BasicModal handleClose={handleClose} open={openModal}>
 							<Post
 								onCloseModal={handleClose}
 								date={date}
@@ -72,17 +68,6 @@ const ImageCard = ({
 					</div>
 				</div>
 			</div>
-			{/* commented this out */}
-			{/* {open && (
-				<Post
-					onCloseModal={onCloseModal}
-					date={date}
-					description={description}
-					title={title}
-					image={image}
-					index={index}
-				/>
-			)} */}
 		</>
 	);
 };

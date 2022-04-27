@@ -1,14 +1,16 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import './DataSection.scss';
-import { convertDateRange, setDefaultDate } from '../../utils/dateFunctions';
-import UtilityBar from '../UtilityBar/UtilityBar';
-import { getNasaData } from '../../utils/dateFunctions';
-import ImageCard from '../../UI/ImageCard/ImageCard';
 import { Apod } from '../../types/Types';
-import { arraySort } from '../../utils/dateFunctions';
+import ImageCard from '../../UI/ImageCard/ImageCard';
 import LoadingSpinner from '../../UI/LoadingSpinner/LoadingSpinner';
 import MessageModal from '../../UI/MessageModal/MessageModal';
+import {
+	arraySort,
+	convertDateRange,
+	getNasaData,
+	setDefaultDate,
+} from '../../utils/dateFunctions';
+import UtilityBar from '../UtilityBar/UtilityBar';
+import './DataSection.scss';
 const api_Key = 'EgxctQoITsGFJtjVAXfeldq6xEKnW6y9j4Wwm0IG';
 
 const DataSection = () => {
@@ -19,11 +21,6 @@ const DataSection = () => {
 	const [nasaPosts, setNasaPosts] = useState<Apod[]>([]);
 	const [likedNasaPosts, setLikedNasaPosts] = useState<Apod[]>([]);
 	const [showExplorePage, setShowExplorePage] = useState(true);
-
-	// modal chanhe name of these handlers
-	// const [openModal, setOpenModal] = useState(false);
-	// const handleOpen = () => setOpenModal(true);
-	// const handleClose = () => setOpenModal(false);
 
 	console.log('date range for data section', dateRange);
 
@@ -49,12 +46,9 @@ const DataSection = () => {
 			setIsLoading(true);
 			const res = await getNasaData(earthDates);
 			const data = await res.data;
-			console.log('waiting for data');
-
-			console.log(data);
 			let fetchedData: Apod[] = [];
-
-			fetchedData = data;
+			fetchedData = [...data];
+			// inatially set the isliked property to false
 			fetchedData.map((item) => (item.isLiked = false));
 			fetchedData.sort((a, b) => arraySort(new Date(a.date), new Date(b.date)));
 			setIsLoading(false);
@@ -63,7 +57,6 @@ const DataSection = () => {
 		} catch (err) {
 			setIsLoading(false);
 			setHasError(true);
-			console.log(err);
 			setErrorMessage(String(err));
 		}
 	};
@@ -72,10 +65,6 @@ const DataSection = () => {
 		fetchData();
 	}, [dateRange]);
 
-	// liked posts before like handler
-	console.log('liked posts before like handler');
-
-	console.log(likedNasaPosts);
 	const likeButtonHandler = (index: number) => {
 		// change like property of the nasa post
 		const likedNasaPost = {
@@ -86,16 +75,17 @@ const DataSection = () => {
 
 		console.log(likedNasaPost);
 
-		// update the content of the . needs work here
 		const tempNasaPosts = [...nasaPosts];
 		tempNasaPosts[index] = likedNasaPost;
 		let tempLikedNasaPosts = [...likedNasaPosts];
 
+		// check if the post is part of the likedNasaPosts
 		const existingPostIndex = likedNasaPosts.findIndex(
 			(post) => post.title === nasaPosts[index].title
 		);
 
 		if (existingPostIndex !== -1) {
+			tempLikedNasaPosts[existingPostIndex] = likedNasaPost;
 			if (likedNasaPost.isLiked) {
 				tempLikedNasaPosts[existingPostIndex] = likedNasaPost;
 			} else {
@@ -111,7 +101,6 @@ const DataSection = () => {
 
 		setNasaPosts(tempNasaPosts);
 		setLikedNasaPosts(tempLikedNasaPosts);
-		console.log(likedNasaPosts);
 	};
 
 	const removeLikeHandler = (index: number) => {
@@ -127,6 +116,7 @@ const DataSection = () => {
 		const unlikedPostIndex = nasaPosts.findIndex(
 			(post) => post.title === likedNasaPosts[index].title
 		);
+		// update the post (isLiked property changed)
 		tempNasaPosts[unlikedPostIndex] = postToRemove;
 
 		//filter out all unliked posts from likedNasaPosts
@@ -135,13 +125,6 @@ const DataSection = () => {
 		setNasaPosts(tempNasaPosts);
 		setLikedNasaPosts(tempLikedNasaPosts);
 	};
-
-	// console.log(nasaPosts[0].date);
-	// console.log(nasaPosts);
-
-	// console.log('url is ', nasaPosts[0].title);
-
-	// console.log(`gotenthe posts`, nasaPosts[0]);
 
 	const Result = () => {
 		if (isLoading) {
@@ -193,8 +176,6 @@ const DataSection = () => {
 		}
 	};
 
-	console.log(errorMessage);
-
 	return (
 		<section className="container">
 			<>
@@ -205,41 +186,7 @@ const DataSection = () => {
 					onClickLikes={showLikedHandler}
 				/>
 				{nasaPosts.length}
-				<div className="container--images">
-					{/* {isLoading && <LoadingSpinner />}
-					{!isLoading &&
-						showExplorePage &&
-						nasaPosts.map((item, index) => (
-							<ImageCard
-								key={index}
-								image={item.hdUrl ? item.hdUrl : item.url}
-								title={item.title}
-								onOpenModal={handleOpen}
-								onCloseModal={handleClose}
-								description={item.explanation}
-								date={item.date}
-								open={openModal}
-								index={index}
-								isLiked={item.isLiked}
-								onClickLike={likeButtonHandler.bind(this, index)}
-							/>
-						))}
-					{!showExplorePage &&
-						likedNasaPosts.map((item, index) => (
-							<ImageCard
-								key={index}
-								image={item.hdUrl ? item.hdUrl : item.url}
-								title={item.title}
-								onOpenModal={handleOpen}
-								onCloseModal={handleClose}
-								description={item.explanation}
-								date={item.date}
-								open={openModal}
-								isLiked={item.isLiked}
-								index={index}
-								onClickLike={removeLikeHandler.bind(this, index)}
-							/>
-						))} */}
+				<div className="container__content">
 					<Result />
 				</div>
 			</>

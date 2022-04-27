@@ -1,12 +1,9 @@
-import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import { Button } from '@mui/material';
+import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Badge from '@mui/material/Badge';
 import IconButton from '@mui/material/IconButton';
 import DateRangePicker from '@wojtekmaj/react-daterange-picker';
 import React from 'react';
 import { setDefaultDate } from '../../utils/dateFunctions';
-import Favorite from '@mui/icons-material/Favorite';
-import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import './UtilityBar.scss';
 
 interface UtilityBarProps {

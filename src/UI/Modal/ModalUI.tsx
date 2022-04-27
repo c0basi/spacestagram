@@ -1,33 +1,17 @@
-import ReactDOM from 'react-dom';
+import { styled } from '@mui/material';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import { IconButton, styled } from '@mui/material';
 import React from 'react';
-import InfoIcon from '@mui/icons-material/Info';
 import './ModalUI.scss';
 
 interface ModalProps {
 	children: React.ReactNode;
-	handleOpen: () => void;
 	handleClose: () => void;
 	open: boolean;
 }
 
-const style = {
-	position: 'absolute' as 'absolute',
-	top: '50%',
-	left: '50%',
-	transform: 'translate(-50%, -50%)',
-	bgcolor: 'background.paper',
-	border: '2px solid #000',
-	boxShadow: 24,
-	p: 4,
-};
-
 const style2 = {
-	overflowY: 'scroll',
+	overflowY: 'auto',
 	maxWidth: '700px',
 	width: '80%',
 	maxHeight: '80%',
@@ -45,7 +29,6 @@ const StyledModal = styled(Modal)({
 
 export default function BasicModal({
 	children,
-	handleOpen,
 	handleClose,
 	open,
 }: ModalProps) {
