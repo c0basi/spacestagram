@@ -12,7 +12,6 @@ import {
 import UtilityBar from '../UtilityBar/UtilityBar';
 import './DataSection.scss';
 import { MediaType } from '../../types/Types';
-const api_Key = 'EgxctQoITsGFJtjVAXfeldq6xEKnW6y9j4Wwm0IG';
 
 const DataSection = () => {
 	const [isLoading, setIsLoading] = useState(false);
@@ -42,27 +41,28 @@ const DataSection = () => {
 		setShowExplorePage(false);
 	};
 
-	const fetchData = async () => {
-		try {
-			setIsLoading(true);
-			const res = await getNasaData(earthDates);
-			const data = await res.data;
-			let fetchedData: Apod[] = [];
-			fetchedData = [...data];
-			// inatially set the isliked property to false
-			fetchedData.map((item) => (item.isLiked = false));
-			fetchedData.sort((a, b) => arraySort(new Date(a.date), new Date(b.date)));
-			setIsLoading(false);
-			setNasaPosts(fetchedData);
-			setHasError(false);
-		} catch (err) {
-			setIsLoading(false);
-			setHasError(true);
-			setErrorMessage(String(err));
-		}
-	};
-
 	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				setIsLoading(true);
+				const res = await getNasaData(earthDates);
+				const data = await res.data;
+				let fetchedData: Apod[] = [];
+				fetchedData = [...data];
+				// inatially set the isliked property to false
+				fetchedData.map((item) => (item.isLiked = false));
+				fetchedData.sort((a, b) =>
+					arraySort(new Date(a.date), new Date(b.date))
+				);
+				setIsLoading(false);
+				setNasaPosts(fetchedData);
+				setHasError(false);
+			} catch (err) {
+				setIsLoading(false);
+				setHasError(true);
+				setErrorMessage(String(err));
+			}
+		};
 		fetchData();
 	}, [dateRange]);
 
