@@ -26,6 +26,8 @@ const UtilityBar = ({
 		setDate(date);
 	};
 
+	console.log('utility bar', date);
+
 	return (
 		<div className="utility">
 			<div className="utility__actions">

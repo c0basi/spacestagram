@@ -27,11 +27,11 @@ const DataSection = () => {
 	// get the startdate and end date from the utility bar component
 	const dateRangeHnadler = (range: string[]) => {
 		setDateRange(range);
-		console.log('set the dates', dateRange);
+		console.log('set the dates', range);
 	};
 
-	const earthDates = convertDateRange(dateRange);
-	console.log(earthDates);
+	// const earthDates = convertDateRange(dateRange);
+	// console.log(earthDates);
 
 	const showExploreHandler = () => {
 		setShowExplorePage(true);
@@ -45,6 +45,7 @@ const DataSection = () => {
 		const fetchData = async () => {
 			try {
 				setIsLoading(true);
+				const earthDates = convertDateRange(dateRange);
 				const res = await getNasaData(earthDates);
 				const data = await res.data;
 				let fetchedData: Apod[] = [];

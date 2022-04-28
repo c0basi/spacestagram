@@ -24,7 +24,11 @@ export const setDefaultDate = (stringUse = false) => {
 	const oneWeekAgo = new Date();
 	oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
 
-	// checks if we are using the string representation of date
+	/*  checks if we are using the string representation of date
+	the react-date range picker uses Date[],
+	 while we want to convert the dates to the strign for the nasa api requests
+	*/
+
 	const defaultDate = stringUse
 		? [
 				...convertDateRange([
