@@ -14,7 +14,7 @@ const MessageModal = ({ message, error }: MessageModalProps) => {
 		<div className={`message ${error ? 'error' : ''}`}>
 			<span>{message}.</span>
 			{error && (
-				<span>Make sure the date is not grater than {todaysDate}.</span>
+				<span>Make sure the date is not greater than {todaysDate}.</span>
 			)}
 		</div>
 	);

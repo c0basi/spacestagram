@@ -139,7 +139,6 @@ const DataSection = () => {
 			return (
 				<MessageModal
 					message={'Please select a date range from the calendar.'}
-					error={true}
 				/>
 			);
 		}
