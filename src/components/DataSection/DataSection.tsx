@@ -133,6 +133,17 @@ const DataSection = () => {
 		if (isLoading) {
 			return <LoadingSpinner />;
 		}
+		const earthDates = convertDateRange(dateRange);
+		// for some reason default date does not work well on iphone but works with laptops
+		if (earthDates[0] === 'NaN-NaN-NaN') {
+			return (
+				<MessageModal
+					message={'Please select a date range from the calendar'}
+					error={true}
+				/>
+			);
+		}
+
 		if (hasError) {
 			console.log(errorMessage);
 			return <MessageModal message={errorMessage} error={true} />;
