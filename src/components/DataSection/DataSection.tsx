@@ -196,7 +196,6 @@ const DataSection = () => {
 					onClickExplore={showExploreHandler}
 					onClickLikes={showLikedHandler}
 				/>
-				{nasaPosts.length}
 				<div className="container__content">
 					<Result />
 				</div>
