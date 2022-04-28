@@ -1,4 +1,5 @@
 import React from 'react';
+import { getTodaysDate } from '../../utils/dateFunctions';
 import './MessageModal.scss';
 
 interface MessageModalProps {
@@ -6,10 +7,15 @@ interface MessageModalProps {
 	error?: boolean;
 }
 
-const MessageModal = ({ message }: MessageModalProps) => {
+const todaysDate = getTodaysDate();
+
+const MessageModal = ({ message, error }: MessageModalProps) => {
 	return (
-		<div className="message">
-			<span>{message}</span>
+		<div className={`message ${error ? 'error' : ''}`}>
+			<span>{message}.</span>
+			{error && (
+				<span>Make sure the date is not grater than {todaysDate}.</span>
+			)}
 		</div>
 	);
 };

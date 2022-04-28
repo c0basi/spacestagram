@@ -138,7 +138,7 @@ const DataSection = () => {
 		if (earthDates[0] === 'NaN-NaN-NaN') {
 			return (
 				<MessageModal
-					message={'Please select a date range from the calendar'}
+					message={'Please select a date range from the calendar.'}
 					error={true}
 				/>
 			);

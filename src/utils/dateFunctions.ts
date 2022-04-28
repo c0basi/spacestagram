@@ -1,6 +1,11 @@
 import axios from 'axios';
 const api_Key = 'EgxctQoITsGFJtjVAXfeldq6xEKnW6y9j4Wwm0IG';
 
+export const getTodaysDate = () => {
+	const currentDate = new Date();
+	return currentDate.toLocaleDateString();
+};
+
 export const getRegularDate = (date: string) => {
 	const day = new Date(date).getDate();
 	const month = new Date(date).getMonth() + 1;
