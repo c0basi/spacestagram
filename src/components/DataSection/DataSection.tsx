@@ -60,6 +60,7 @@ const DataSection = () => {
 			} catch (err) {
 				setIsLoading(false);
 				setHasError(true);
+				console.log(err);
 				setErrorMessage(String(err));
 			}
 		};
@@ -132,6 +133,7 @@ const DataSection = () => {
 			return <LoadingSpinner />;
 		}
 		if (hasError) {
+			console.log(errorMessage);
 			return <MessageModal message={errorMessage} error={true} />;
 		}
 		if (!isLoading && showExplorePage) {
