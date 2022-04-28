@@ -22,12 +22,9 @@ const DataSection = () => {
 	const [likedNasaPosts, setLikedNasaPosts] = useState<Apod[]>([]);
 	const [showExplorePage, setShowExplorePage] = useState(true);
 
-	console.log('date range for data section', dateRange);
-
 	// get the startdate and end date from the utility bar component
 	const dateRangeHnadler = (range: string[]) => {
 		setDateRange(range);
-		console.log('set the dates', range);
 	};
 
 	// const earthDates = convertDateRange(dateRange);
@@ -61,7 +58,6 @@ const DataSection = () => {
 			} catch (err) {
 				setIsLoading(false);
 				setHasError(true);
-				console.log(err);
 				setErrorMessage(String(err));
 			}
 		};
@@ -74,10 +70,6 @@ const DataSection = () => {
 			...nasaPosts[index],
 			isLiked: !nasaPosts[index].isLiked,
 		};
-		console.log('liked post');
-
-		console.log(likedNasaPost);
-
 		const tempNasaPosts = [...nasaPosts];
 		tempNasaPosts[index] = likedNasaPost;
 		let tempLikedNasaPosts = [...likedNasaPosts];
@@ -144,7 +136,6 @@ const DataSection = () => {
 		}
 
 		if (hasError) {
-			console.log(errorMessage);
 			return <MessageModal message={errorMessage} error={true} />;
 		}
 		if (!isLoading && showExplorePage) {
@@ -195,8 +186,6 @@ const DataSection = () => {
 			);
 		}
 	};
-
-	console.log(likedNasaPosts);
 
 	return (
 		<section className="container">

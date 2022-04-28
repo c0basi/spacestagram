@@ -15,12 +15,8 @@ export const getRegularDate = (date: string) => {
 };
 
 // rember to keep date range naming consistent
-export const convertDateRange = (selectedDate: string[]) => {
-	console.log('value in convert function');
-
-	console.log(selectedDate);
-
-	return [getRegularDate(selectedDate[0]), getRegularDate(selectedDate[1])];
+export const convertDateRange = (dateRange: string[]) => {
+	return [getRegularDate(dateRange[0]), getRegularDate(dateRange[1])];
 };
 
 // sets the date range picker to the past week

@@ -9,8 +9,6 @@ import UtilityBar from './components/UtilityBar/UtilityBar';
 function App() {
 	return (
 		<div className="App">
-			{/* <div className="stars"></div>
-			<div className="twinkling"></div> */}
 			<Animation />
 			<Header />
 			<DataSection />
