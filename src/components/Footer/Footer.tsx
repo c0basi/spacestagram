@@ -4,7 +4,7 @@ import './Footer.scss';
 const Footer = () => {
 	return (
 		<div className="footer">
-			<p>Completed by: Charles Obasi</p>
+			<p>Made by: Charles Obasi</p>
 		</div>
 	);
 };
